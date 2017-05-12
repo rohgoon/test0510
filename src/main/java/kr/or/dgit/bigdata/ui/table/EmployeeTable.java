@@ -3,7 +3,6 @@ package kr.or.dgit.bigdata.ui.table;
 import java.util.List;
 
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
 
 import kr.or.dgit.bigdata.dto.EmployeeDto;
 
