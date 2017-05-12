@@ -7,7 +7,6 @@ import javax.swing.table.TableColumnModel;
 
 public abstract class PlainTable extends JTable {
 	
-	//int ColumDataIndex;
 	
 	protected void tableSetWidth(int... width) {
 		TableColumnModel model = getColumnModel();

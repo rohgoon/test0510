@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import kr.or.dgit.bigdata.ui.table.EmployeeTable;
 import kr.or.dgit.bigdata.ui.table.PlainTable;
@@ -29,7 +30,7 @@ public class SubFrame extends JFrame {
 	private JButton btnCancel;
 	private JPanel panel;
 	private JScrollPane scrollPane;
-	private int columnDataIndex = 1;
+	private PlainTable table;
 	/**
 	 * Create the frame.
 	 */
@@ -63,6 +64,10 @@ public class SubFrame extends JFrame {
 		
 		scrollPane = new JScrollPane();
 		pnTable.add(scrollPane, BorderLayout.CENTER);
+		
+		table = new EmployeeTable();
+		((EmployeeTable)table).setTableWithData();
+		scrollPane.setViewportView(table);
 	}
 	public JPanel getPnInput() {
 		return pnInput;
