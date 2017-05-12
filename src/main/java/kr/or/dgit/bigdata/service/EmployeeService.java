@@ -6,18 +6,18 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
-import kr.or.dgit.bigdata.dto.EmployeeDto;
+import kr.or.dgit.bigdata.dto.Employee;
 import kr.or.dgit.bigdata.mappers.EmployeeMapper;
 import kr.or.dgit.bigdata.util.MyBatisSqlSessionFactory;
 
-public class EmployeeService extends AbstractService<EmployeeDto>{
+public class EmployeeService extends AbstractService<Employee>{
 	private static final Logger logger = Logger.getLogger(EmployeeService.class);
 	private static final EmployeeService instance = new EmployeeService();
 	public static EmployeeService getInstance() {
 		return instance;
 	}
 	@Override
-	public void insert(EmployeeDto dto) {
+	public void insert(Employee dto) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("insert(EmployeeDto) - start");
 		}
@@ -31,7 +31,7 @@ public class EmployeeService extends AbstractService<EmployeeDto>{
 		}
 	}
 	@Override
-	public void update(EmployeeDto dto) {
+	public void update(Employee dto) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("update(DepartmentDto) - start");
 		}
@@ -59,11 +59,11 @@ public class EmployeeService extends AbstractService<EmployeeDto>{
 		}
 	}
 	@Override
-	public List<EmployeeDto> selectAll() {
+	public List<Employee> selectAll() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectAll() - start");
 		}
-		List<EmployeeDto> dto = new ArrayList<EmployeeDto>();
+		List<Employee> dto = new ArrayList<Employee>();
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try{
 			EmployeeMapper dMapper = sqlSession.getMapper(EmployeeMapper.class);
@@ -75,11 +75,11 @@ public class EmployeeService extends AbstractService<EmployeeDto>{
 		return dto;
 	}
 	@Override
-	public EmployeeDto selectOne(int no) {
+	public Employee selectOne(int no) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectOne() - start");
 		}
-		EmployeeDto dto = new EmployeeDto();
+		Employee dto = new Employee();
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try{
 			EmployeeMapper dMapper = sqlSession.getMapper(EmployeeMapper.class);

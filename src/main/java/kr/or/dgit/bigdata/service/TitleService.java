@@ -6,18 +6,18 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
-import kr.or.dgit.bigdata.dto.TitleDto;
+import kr.or.dgit.bigdata.dto.Title;
 import kr.or.dgit.bigdata.mappers.TitleMapper;
 import kr.or.dgit.bigdata.util.MyBatisSqlSessionFactory;
 
-public class TitleService extends AbstractService<TitleDto>{
+public class TitleService extends AbstractService<Title>{
 	private static final Logger logger = Logger.getLogger(TitleService.class);
 	private static final TitleService instance = new TitleService();
 	public static TitleService getInstance() {
 		return instance;
 	}
 	@Override
-	public void insert(TitleDto dto) {
+	public void insert(Title dto) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("update(TitleDto) - start");
 		}
@@ -31,7 +31,7 @@ public class TitleService extends AbstractService<TitleDto>{
 		}
 	}
 	@Override
-	public void update(TitleDto dto) {
+	public void update(Title dto) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("update(TitleDto) - start");
 		}
@@ -59,11 +59,11 @@ public class TitleService extends AbstractService<TitleDto>{
 		}
 	}
 	@Override
-	public List<TitleDto> selectAll() {
+	public List<Title> selectAll() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectAll() - start");
 		}
-		List<TitleDto> dto = new ArrayList<TitleDto>();
+		List<Title> dto = new ArrayList<Title>();
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try{
 			TitleMapper tMapper = sqlSession.getMapper(TitleMapper.class);
@@ -75,11 +75,11 @@ public class TitleService extends AbstractService<TitleDto>{
 		return dto;
 	}
 	@Override
-	public TitleDto selectOne(int no) {
+	public Title selectOne(int no) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectOne() - start");
 		}
-		TitleDto dto = new TitleDto();
+		Title dto = new Title();
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try{
 			TitleMapper tMapper = sqlSession.getMapper(TitleMapper.class);

@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.swing.SwingConstants;
 
-import kr.or.dgit.bigdata.dto.EmployeeDto;
+import kr.or.dgit.bigdata.dto.Employee;
 
 public class EmployeeTable extends PlainTable {
-	private List<EmployeeDto> eList; 
+	private List<Employee> eList; 
 	@Override
 	public void tableSetAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2,4,5,6);

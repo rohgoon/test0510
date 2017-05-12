@@ -6,11 +6,11 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
-import kr.or.dgit.bigdata.dto.DepartmentDto;
+import kr.or.dgit.bigdata.dto.Department;
 import kr.or.dgit.bigdata.mappers.DepartmentMapper;
 import kr.or.dgit.bigdata.util.MyBatisSqlSessionFactory;
 
-public class DepartmentService extends AbstractService<DepartmentDto>{
+public class DepartmentService extends AbstractService<Department>{
 	private static final Logger logger = Logger.getLogger(DepartmentService.class);
 	private static final DepartmentService instance = new DepartmentService();
 	public static DepartmentService getInstance() {
@@ -18,7 +18,7 @@ public class DepartmentService extends AbstractService<DepartmentDto>{
 	}
 	public DepartmentService() {}
 	@Override
-	public void insert(DepartmentDto dto) {
+	public void insert(Department dto) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("insert(DepartmentDto) - start");
 		}
@@ -32,7 +32,7 @@ public class DepartmentService extends AbstractService<DepartmentDto>{
 		}
 	}
 	@Override
-	public void update(DepartmentDto dto) {
+	public void update(Department dto) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("update(DepartmentDto) - start");
 		}
@@ -60,11 +60,11 @@ public class DepartmentService extends AbstractService<DepartmentDto>{
 		}
 	}
 	@Override
-	public List<DepartmentDto> selectAll() {
+	public List<Department> selectAll() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectAll() - start");
 		}
-		List<DepartmentDto> dto = new ArrayList<DepartmentDto>();
+		List<Department> dto = new ArrayList<Department>();
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try{
 			DepartmentMapper dMapper = sqlSession.getMapper(DepartmentMapper.class);
@@ -76,11 +76,11 @@ public class DepartmentService extends AbstractService<DepartmentDto>{
 		return dto;
 	}
 	@Override
-	public DepartmentDto selectOne(int no) {
+	public Department selectOne(int no) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectOne() - start");
 		}
-		DepartmentDto dto = new DepartmentDto();
+		Department dto = new Department();
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try{
 			DepartmentMapper dMapper = sqlSession.getMapper(DepartmentMapper.class);

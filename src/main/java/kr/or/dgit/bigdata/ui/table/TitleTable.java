@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.swing.SwingConstants;
 
-import kr.or.dgit.bigdata.dto.TitleDto;
+import kr.or.dgit.bigdata.dto.Title;
 
 public class TitleTable extends PlainTable {
-	private List<TitleDto> tList;
+	private List<Title> tList;
 	@Override
 	public void tableSetAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0,1);

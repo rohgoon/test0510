@@ -1,13 +1,13 @@
 package kr.or.dgit.bigdata.dto;
 
-public class DepartmentDto {
+public class Department {
 	private int dcode;
 	private String dname;
 	private int floor;
-	public DepartmentDto() {
+	public Department() {
 		super();
 	}
-	public DepartmentDto(int dcode, String dname, int floor) {
+	public Department(int dcode, String dname, int floor) {
 		super();
 		this.dcode = dcode;
 		this.dname = dname;

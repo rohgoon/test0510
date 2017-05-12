@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.mappers.DepartmentMapper">
-	
+	<insert id="insert" parameterType="Department">
+		insert into department(dname,floor) values(#{dname},#{floor})
+	</insert>
+	<update id="update" parameterType="Department">
+		update department set dname=#{dname}, floor=#{floor} where dno =#{dno}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from department where dno =#{dno}
+	</delete>
+	<select id="selectAll" resultType="Department">
+		select * from department order by dno desc
+	</select>
+	<select id="selectOne" parameterType="int" resultType="Department">
+		select * from department where dno =#{dno}
+	</select>
 </mapper>

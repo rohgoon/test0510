@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.swing.SwingConstants;
 
-import kr.or.dgit.bigdata.dto.DepartmentDto;
+import kr.or.dgit.bigdata.dto.Department;
 
 public class DepartmentTable extends PlainTable {
-	private List<DepartmentDto> dList;
+	private List<Department> dList;
 	@Override
 	public void tableSetAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0,1,2);

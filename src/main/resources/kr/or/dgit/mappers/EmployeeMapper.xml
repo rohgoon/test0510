@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.mappers.EmployeeMapper">
-	
+	<insert id="insert" parameterType="Employee">
+		insert into employee(ename, salary, dno, gender, joindate, title) 
+		values(#{ename},#{salary},#{ename},#{dno},#{gender},#{joindate},#{title})
+	</insert>
+	<update id="update" parameterType="Employee">
+		update employee set ename=#{ename}, 
+		salary=#{salary}, dno=#{dno}, gender=#{gender}, title=#{title}
+		where eno =#{eno}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from employee where eno =#{eno}
+	</delete>
+	<select id="selectAll" resultType="Employee">
+		select * from employee order by eno desc
+	</select>
+	<select id="selectOne" parameterType="int" resultType="Employee">
+		select * from employee where eno =#{eno}
+	</select>
 </mapper>

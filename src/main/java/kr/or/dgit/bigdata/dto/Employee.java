@@ -2,7 +2,7 @@ package kr.or.dgit.bigdata.dto;
 
 import java.util.Date;
 
-public class EmployeeDto {
+public class Employee {
 	private int eno;
 	private String ename;
 	private int salary;
@@ -10,10 +10,10 @@ public class EmployeeDto {
 	private boolean gender;
 	private Date joindate;
 	private int title;
-	public EmployeeDto() {
+	public Employee() {
 		super();
 	}
-	public EmployeeDto(int eno, String ename, int salary, int dno, boolean gender, Date joindate, int title) {
+	public Employee(int eno, String ename, int salary, int dno, boolean gender, Date joindate, int title) {
 		super();
 		this.eno = eno;
 		this.ename = ename;

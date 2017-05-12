@@ -1,14 +1,14 @@
 package kr.or.dgit.bigdata.dto;
 
-public class TitleDto {
+public class Title {
 	private int tcode;
 	private String tname;
 	
 	
-	public TitleDto() {
+	public Title() {
 		super();
 	}
-	public TitleDto(int tcode, String tname) {
+	public Title(int tcode, String tname) {
 		super();
 		this.tcode = tcode;
 		this.tname = tname;
