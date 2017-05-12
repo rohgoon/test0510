@@ -5,6 +5,8 @@ import java.util.List;
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.bigdata.dto.Title;
+import kr.or.dgit.bigdata.service.DepartmentService;
+import kr.or.dgit.bigdata.service.TitleService;
 
 public class TitleTable extends PlainTable {
 	private List<Title> tList;
@@ -24,8 +26,15 @@ public class TitleTable extends PlainTable {
 
 	@Override
 	public String[][] getDatas() {
-		// TODO Auto-generated method stub
-		return null;
+		tList = TitleService.getInstance().selectAll();
+		if(!tList.isEmpty()){
+			String[][] res = new String[tList.size()][];
+			for(int i=0;i<res.length;i++){
+				res[i] = tList.get(i).toArray();
+			}
+			return res;
+		}
+		return new String[][]{};
 	}
 
 	@Override

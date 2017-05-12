@@ -1,5 +1,6 @@
 package kr.or.dgit.bigdata.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Employee {
@@ -65,5 +66,13 @@ public class Employee {
 	public void setTitle(int title) {
 		this.title = title;
 	}
-	
+	public String[] toArray(){
+		int g= 0;
+		if (gender) {
+			g=1;
+		} 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String jd = sdf.format(joindate);
+		return new String[]{eno+"", ename, salary+"",dno+"",g+"",jd,title+""};
+	}
 }

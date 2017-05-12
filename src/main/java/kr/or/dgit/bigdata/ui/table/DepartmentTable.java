@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.bigdata.dto.Department;
+import kr.or.dgit.bigdata.service.DepartmentService;
 
 public class DepartmentTable extends PlainTable {
 	private List<Department> dList;
@@ -23,8 +24,15 @@ public class DepartmentTable extends PlainTable {
 
 	@Override
 	public String[][] getDatas() {
-		// TODO Auto-generated method stub
-		return null;
+		dList = DepartmentService.getInstance().selectAll();
+		if(!dList.isEmpty()){
+			String[][] res = new String[dList.size()][];
+			for(int i=0;i<res.length;i++){
+				res[i] = dList.get(i).toArray();
+			}
+			return res;
+		}
+		return new String[][]{};
 	}
 
 	@Override

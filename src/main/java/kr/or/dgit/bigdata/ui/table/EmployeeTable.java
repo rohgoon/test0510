@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.bigdata.dto.Employee;
+import kr.or.dgit.bigdata.service.EmployeeService;
 
 public class EmployeeTable extends PlainTable {
 	private List<Employee> eList; 
@@ -25,8 +26,15 @@ public class EmployeeTable extends PlainTable {
 
 	@Override
 	public String[][] getDatas() {
-		// TODO Auto-generated method stub
-		return null;
+		eList = EmployeeService.getInstance().selectAll();
+		if(!eList.isEmpty()){
+			String[][] res = new String[eList.size()][];
+			for(int i=0;i<res.length;i++){
+				res[i] = eList.get(i).toArray();
+			}
+			return res;
+		}
+		return new String[][]{};
 	}
 
 	@Override

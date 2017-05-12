@@ -26,5 +26,7 @@ public class Title {
 		this.tname = tname;
 	}
 	
-	
+	public String[] toArray(){
+		return new String[]{tcode+"", tname};
+	}
 }

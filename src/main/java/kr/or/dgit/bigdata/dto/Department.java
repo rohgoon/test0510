@@ -32,5 +32,8 @@ public class Department {
 		this.floor = floor;
 	}
 	
+	public String[] toArray(){
+		return new String[]{dcode+"", dname, floor+""};
+	}
 	
 }
