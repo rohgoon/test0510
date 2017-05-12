@@ -8,11 +8,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.bigdata.ui.panel.MemberPanel;
 import kr.or.dgit.bigdata.ui.panel.TeamPanel;
 import kr.or.dgit.bigdata.ui.panel.TitlePanel;
+import kr.or.dgit.bigdata.ui.table.DepartmentTable;
+import kr.or.dgit.bigdata.ui.table.EmployeeTable;
+import kr.or.dgit.bigdata.ui.table.PlainTable;
+import kr.or.dgit.bigdata.ui.table.TitleTable;
 
 
 public class ERP_Application extends JFrame implements ActionListener {
@@ -21,6 +26,7 @@ public class ERP_Application extends JFrame implements ActionListener {
 	private JButton btnMem;
 	private JButton btnTeam;
 	private JButton btnTitle;
+	private PlainTable table;
 	/**
 	 * Create the frame.
 	 */
@@ -58,16 +64,24 @@ public class ERP_Application extends JFrame implements ActionListener {
 		JPanel memberp = new MemberPanel();
 		JPanel teamp = new TeamPanel();
 		JPanel titlep = new TitlePanel();
-		if (e.getSource() == btnMem) {				
+		
+		
+		if (e.getSource() == btnMem) {
+			sf.setTitle("사원관리");
 			pnInput.add(memberp, BorderLayout.CENTER);
-			sf.setBounds(100, 220, 700, 750);			
+			sf.setBounds(100, 220, 700, 750);	
+			
 		} else if (e.getSource() == btnTeam) {
+			sf.setTitle("부서관리");
 			pnInput.add(teamp, BorderLayout.CENTER);
 			sf.setBounds(100, 220, 700, 380);
+			
 		} else if (e.getSource() == btnTitle) {
+			sf.setTitle("직책관리");
 			pnInput.add(titlep, BorderLayout.CENTER);
 			sf.setBounds(100, 220, 700, 290);
-		}		
+			
+		}	
 		sf.setVisible(true);
 	}
 

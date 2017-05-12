@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.bigdata.ui.table.EmployeeTable;
 import kr.or.dgit.bigdata.ui.table.PlainTable;
 
 import java.awt.GridBagLayout;
@@ -28,7 +29,6 @@ public class SubFrame extends JFrame {
 	private JButton btnCancel;
 	private JPanel panel;
 	private JScrollPane scrollPane;
-	private PlainTable table;
 	private int columnDataIndex = 1;
 	/**
 	 * Create the frame.
@@ -63,10 +63,6 @@ public class SubFrame extends JFrame {
 		
 		scrollPane = new JScrollPane();
 		pnTable.add(scrollPane, BorderLayout.CENTER);
-		
-		/*table = new PlainTable();
-		table.setColumDataIndex(columnDataIndex);
-		scrollPane.setViewportView(table);*/
 	}
 	public JPanel getPnInput() {
 		return pnInput;
