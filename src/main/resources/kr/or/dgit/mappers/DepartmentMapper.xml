@@ -5,15 +5,15 @@
 		insert into department(dname,floor) values(#{dname},#{floor})
 	</insert>
 	<update id="update" parameterType="Department">
-		update department set dname=#{dname}, floor=#{floor} where dno =#{dno}
+		update department set dname=#{dname}, floor=#{floor} where dcode =#{dcode}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from department where dno =#{dno}
+		delete from department where dcode =#{dcode}
 	</delete>
 	<select id="selectAll" resultType="Department">
-		select * from department order by dno desc
+		select * from department order by dcode desc
 	</select>
 	<select id="selectOne" parameterType="int" resultType="Department">
-		select * from department where dno =#{dno}
+		select * from department where dcode =#{dcode}
 	</select>
 </mapper>
