@@ -10,12 +10,12 @@ import kr.or.dgit.bigdata.dto.DepartmentDto;
 import kr.or.dgit.bigdata.mappers.DepartmentMapper;
 import kr.or.dgit.bigdata.util.MyBatisSqlSessionFactory;
 
-public class DepartmentService extends AbstractService<DepartmentDto,DepartmentService>{
+public class DepartmentService extends AbstractService<DepartmentDto>{
 	private static final Logger logger = Logger.getLogger(DepartmentService.class);
-	/*private static final DepartmentService instance = new DepartmentService();
+	private static final DepartmentService instance = new DepartmentService();
 	public static DepartmentService getInstance() {
 		return instance;
-	}*/
+	}
 	public DepartmentService() {}
 	@Override
 	public void insert(DepartmentDto dto) {
@@ -78,7 +78,7 @@ public class DepartmentService extends AbstractService<DepartmentDto,DepartmentS
 	@Override
 	public DepartmentDto selectOne(int no) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("selectAll() - start");
+			logger.debug("selectOne() - start");
 		}
 		DepartmentDto dto = new DepartmentDto();
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();

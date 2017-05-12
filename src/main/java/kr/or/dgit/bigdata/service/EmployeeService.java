@@ -1,41 +1,94 @@
 package kr.or.dgit.bigdata.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import kr.or.dgit.bigdata.dto.EmployeeDto;
+import kr.or.dgit.bigdata.mappers.EmployeeMapper;
+import kr.or.dgit.bigdata.util.MyBatisSqlSessionFactory;
 
-public class EmployeeService extends AbstractService<EmployeeDto,EmployeeService>{
+public class EmployeeService extends AbstractService<EmployeeDto>{
 	private static final Logger logger = Logger.getLogger(EmployeeService.class);
-	/*private static final EmployeeService instance = new EmployeeService();
+	private static final EmployeeService instance = new EmployeeService();
 	public static EmployeeService getInstance() {
 		return instance;
-	}*/
+	}
 	@Override
 	public void insert(EmployeeDto dto) {
-		// TODO Auto-generated method stub
-		
+		if (logger.isDebugEnabled()) {
+			logger.debug("insert(EmployeeDto) - start");
+		}
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try{
+			EmployeeMapper dMapper = sqlSession.getMapper(EmployeeMapper.class);
+			dMapper.insert(dto);
+			sqlSession.commit();
+		}finally {
+			sqlSession.close();
+		}
 	}
 	@Override
 	public void update(EmployeeDto dto) {
-		// TODO Auto-generated method stub
-		
+		if (logger.isDebugEnabled()) {
+			logger.debug("update(DepartmentDto) - start");
+		}
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try{
+			EmployeeMapper dMapper = sqlSession.getMapper(EmployeeMapper.class);
+			dMapper.update(dto);
+			sqlSession.commit();
+		}finally {
+			sqlSession.close();
+		}
 	}
 	@Override
 	public void delete(int no) {
-		// TODO Auto-generated method stub
-		
+		if (logger.isDebugEnabled()) {
+			logger.debug("delete(int) - start");
+		}
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try{
+			EmployeeMapper dMapper = sqlSession.getMapper(EmployeeMapper.class);
+			dMapper.delete(no);
+			sqlSession.commit();
+		}finally {
+			sqlSession.close();
+		}
 	}
 	@Override
 	public List<EmployeeDto> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectAll() - start");
+		}
+		List<EmployeeDto> dto = new ArrayList<EmployeeDto>();
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try{
+			EmployeeMapper dMapper = sqlSession.getMapper(EmployeeMapper.class);
+			dto = dMapper.selectAll();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return dto;
 	}
 	@Override
 	public EmployeeDto selectOne(int no) {
-		// TODO Auto-generated method stub
-		return null;
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectOne() - start");
+		}
+		EmployeeDto dto = new EmployeeDto();
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try{
+			EmployeeMapper dMapper = sqlSession.getMapper(EmployeeMapper.class);
+			dto = dMapper.selectOne(no);
+		}finally {
+			sqlSession.close();
+		}
+		
+		return dto;
 	}
 	
 }
