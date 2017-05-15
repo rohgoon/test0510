@@ -35,5 +35,9 @@ public class Department {
 	public String[] toArray(){
 		return new String[]{dcode+"", dname, floor+""};
 	}
+	@Override
+	public String toString() {
+		return String.format("Department [dcode=%s, dname=%s, floor=%s]", dcode, dname, floor);
+	}
 	
 }

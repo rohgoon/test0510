@@ -43,9 +43,9 @@ public class ExportSettingService extends ServiceSetting {
 
 	private void executeExportData(Object filePath, String tableName) {
 		String sql = String.format("select * into outfile '%s' " 
-					+ "character set 'UTF8' " 
-					+ "fields terminated by ',' "
-					+ "lines terminated by '\n' from %s", filePath, tableName);
+				+ "character set 'UTF8' " 
+				+ "fields terminated by ',' "
+				+ "lines terminated by '\n' from %s", filePath, tableName);
 		Statement stmt = null;
 		//System.out.println(" 확인 : "+sql);
 		Connection con = NcsJdbc.getConnection();

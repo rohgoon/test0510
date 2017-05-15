@@ -8,7 +8,7 @@ public class NcsConfig {
 	public static final String DB_NAME = "ncs_erp_rcg";
 	public static final String PJT_USER = "user_ncs";
 	public static final String PJT_PASSWD = "user_ncs";
-	public static final String[] TABLE_NAME = { "title","department", "employee" };
+	public static final String[] TABLE_NAME = {"title","department","employee"};
 	public static final String EXPORT_DIR = System.getProperty("user.dir") + "\\BackupFiles\\";
 	public static final String IMPORT_DIR = System.getProperty("user.dir") + "\\DataFiles\\";
 	public static final String MYSQL_EXPORT_PATH = "C:\\ProgramData\\MySQL\\MySQL Server 5.6\\Uploads\\";

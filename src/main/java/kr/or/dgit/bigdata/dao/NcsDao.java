@@ -81,65 +81,7 @@ public class NcsDao implements NcsInterDao<NcsDao>{
 			NcsJdbcUtil.close(pstmt);
 		}
 	}
-/*	
-	
-	
-	
-	public int insertTable(PdtCode c) {
-		String sql = "insert into cafeteria.pdtcode values(?,?)";
-		Connection con = CoffeeDbc.getConnection();
-		int res = -1;
-		
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, c.getCfCode());
-			pstmt.setString(2, c.getCfName());
-			System.out.println(pstmt);
 
-			res = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println(e.getErrorCode());
-			if (e.getErrorCode() == 1062) {
-				JOptionPane.showMessageDialog(null, "중복된 제품 코드 입니다.");
-				return 0000;
-			}
-		
-
-		} finally {
-			CoffeeJdbcUtil.close(pstmt);
-		}
-
-		return res;
-	}
-	
-	public int insertTable(PdtSale s) {
-		String sql = "insert into cafeteria.pdtsale values(?,?,?,?)";
-		Connection con = CoffeeDbc.getConnection();
-		int res = -1;
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, s.getCfCode());
-			pstmt.setInt(2, s.getCfOne());
-			pstmt.setInt(3, s.getCfSell());
-			pstmt.setInt(4, s.getCfMargin());
-			System.out.println(pstmt);
-
-			res = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			
-			if (e.getErrorCode() == 1062) {
-				System.out.println(e.getErrorCode());
-			}
-			
-
-		} finally {
-			CoffeeJdbcUtil.close(pstmt);
-		}
-
-		return res;
-	}*/
 	
 }
 

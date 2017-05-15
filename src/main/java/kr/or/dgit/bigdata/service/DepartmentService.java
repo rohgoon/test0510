@@ -10,14 +10,14 @@ import kr.or.dgit.bigdata.dto.Department;
 import kr.or.dgit.bigdata.mappers.DepartmentMapper;
 import kr.or.dgit.bigdata.util.MyBatisSqlSessionFactory;
 
-public class DepartmentService extends AbstractService<Department>{
+public class DepartmentService{
 	private static final Logger logger = Logger.getLogger(DepartmentService.class);
 	private static final DepartmentService instance = new DepartmentService();
 	public static DepartmentService getInstance() {
 		return instance;
 	}
 	public DepartmentService() {}
-	@Override
+	
 	public void insert(Department dto) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("insert(DepartmentDto) - start");
@@ -31,7 +31,7 @@ public class DepartmentService extends AbstractService<Department>{
 			sqlSession.close();
 		}
 	}
-	@Override
+	
 	public void update(Department dto) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("update(DepartmentDto) - start");
@@ -45,7 +45,7 @@ public class DepartmentService extends AbstractService<Department>{
 			sqlSession.close();
 		}
 	}
-	@Override
+	
 	public void delete(int no) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("delete(int) - start");
@@ -59,23 +59,28 @@ public class DepartmentService extends AbstractService<Department>{
 			sqlSession.close();
 		}
 	}
-	@Override
+	
 	public List<Department> selectAll() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectAll() - start");
 		}
+		System.out.println("Department selectAll start");
 		List<Department> dto = new ArrayList<Department>();
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try{
+			System.out.println("Department selectAll sqlSession open");
 			DepartmentMapper dMapper = sqlSession.getMapper(DepartmentMapper.class);
-			dto = dMapper.selectAll();
+			System.out.println(sqlSession.toString());
+			dto = dMapper.selectAll();			
+			//System.out.println(dto.get(0).toString());
+			System.out.println("Department selectAll end");
 		}finally {
 			sqlSession.close();
 		}
 		
 		return dto;
 	}
-	@Override
+	
 	public Department selectOne(int no) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectOne() - start");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.dgit.mappers.EmployeeMapper">
+<mapper namespace="kr.or.dgit.bigdata.mappers.EmployeeMapper">
 	<insert id="insert" parameterType="Employee">
 		insert into employee(ename, salary, dno, gender, joindate, title) 
 		values(#{ename},#{salary},#{ename},#{dno},#{gender},#{joindate},#{title})

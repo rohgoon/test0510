@@ -1,17 +1,18 @@
 package kr.or.dgit.bigdata.ui.panel;
 
-import javax.swing.JPanel;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JRadioButton;
-import javax.swing.JComboBox;
-import javax.swing.JSpinner;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class MemberPanel extends JPanel {
 	private JTextField tfNum;
@@ -21,7 +22,7 @@ public class MemberPanel extends JPanel {
 	private JRadioButton rbF;
 	private JComboBox cbTtile;
 	private JSpinner spSal;
-	private JComboBox cbFloor;
+	private JComboBox cbFloor;	
 
 	/**
 	 * Create the panel.

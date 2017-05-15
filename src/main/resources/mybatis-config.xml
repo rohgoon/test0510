@@ -22,6 +22,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<package name="kr.or.dgit.mappers" />
+		<package name="kr.or.dgit.bigdata.mappers" />
 	</mappers>
 </configuration>
