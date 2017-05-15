@@ -3,7 +3,10 @@ package kr.or.dgit.bigdata.ui.panel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.SpinnerNumberModel;
 
 public class MemberPanel extends JPanel {
 	private JTextField tfNum;
@@ -50,6 +53,7 @@ public class MemberPanel extends JPanel {
 		
 		tfNum = new JTextField();
 		tfNum.setEditable(false);
+		tfNum.setText("E017001");
 		panel.add(tfNum);
 		tfNum.setColumns(10);
 		
@@ -86,10 +90,17 @@ public class MemberPanel extends JPanel {
 		pnJender.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		rbM = new JRadioButton("남");
-		pnJender.add(rbM);
-		
+		rbM.setSelected(true);
 		rbF = new JRadioButton("여");
+		
+		ButtonGroup activityG = new ButtonGroup();
+		activityG.add(rbM);
+		activityG.add(rbF);
+		
+		pnJender.add(rbM);
 		pnJender.add(rbF);
+		
+		
 		
 		JLabel lblFloor = new JLabel("부서");
 		panel.add(lblFloor);
@@ -104,8 +115,13 @@ public class MemberPanel extends JPanel {
 		lblRegDate.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfRegDate = new JTextField();
+		Date rgd = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String resRgd = sdf.format(rgd);
+		tfRegDate.setText(resRgd);
 		panel.add(tfRegDate);
 		tfRegDate.setColumns(10);
+		
 		
 	}
 

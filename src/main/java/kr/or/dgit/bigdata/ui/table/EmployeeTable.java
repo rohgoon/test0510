@@ -19,7 +19,7 @@ public class EmployeeTable extends PlainTable {
 	public void tableSetAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2,4,5,6);
 		tableCellAlignment(SwingConstants.RIGHT, 3);
-		tableSetWidth(60, 100, 100, 200,100,200,200);
+		tableSetWidth(150, 100, 100, 200,100,200,200);
 	}
 
 	@Override
