@@ -10,4 +10,5 @@ public interface TitleMapper {
 	public void delete(int dno);
 	public List<Title> selectAll();
 	public Title selectOne(int dno);
+	public Title selectLastOne();
 }

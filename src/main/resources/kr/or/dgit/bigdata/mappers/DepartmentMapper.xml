@@ -16,4 +16,7 @@
 	<select id="selectOne" parameterType="int" resultType="Department">
 		select * from department where dcode =#{dcode}
 	</select>
+	<select id="selectLastOne" resultType="Department">
+		select * from department order by dcode desc limit 1
+	</select>
 </mapper>

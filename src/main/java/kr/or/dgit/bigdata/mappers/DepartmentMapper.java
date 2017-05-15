@@ -10,4 +10,5 @@ public interface DepartmentMapper{
 	public void delete(int dno);
 	public List<Department> selectAll();
 	public Department selectOne(int dno);
+	public Department selectLastOne();
 }

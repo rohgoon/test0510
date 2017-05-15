@@ -13,6 +13,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SpinnerNumberModel;
 
 public class MemberPanel extends JPanel {
 	private JTextField tfNum;
@@ -23,7 +24,8 @@ public class MemberPanel extends JPanel {
 	private JComboBox cbTtile;
 	private JSpinner spSal;
 	private JComboBox cbFloor;	
-
+	private String[] titleList ={"사장", "부장", "과장", "대리", "사원"};
+	private String[] departmentList = {"마케팅(10층)", "개발(9층)", "인사(6층)", "총무(7층)", "경영(4층)"};
 	/**
 	 * Create the panel.
 	 */
@@ -64,7 +66,7 @@ public class MemberPanel extends JPanel {
 		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		cbTtile = new JComboBox();
-		cbTtile.setModel(new DefaultComboBoxModel(new String[] {"사장", "부장", "과장", "대리", "사원"}));
+		cbTtile.setModel(new DefaultComboBoxModel(titleList));
 		panel.add(cbTtile);
 		
 		JLabel lblSal = new JLabel("급여");
@@ -72,6 +74,7 @@ public class MemberPanel extends JPanel {
 		lblSal.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		spSal = new JSpinner();
+		spSal.setModel(new SpinnerNumberModel(1500000, 1000000, 5000000, 1));
 		panel.add(spSal);
 		
 		JLabel lblJen = new JLabel("성별");
@@ -93,7 +96,7 @@ public class MemberPanel extends JPanel {
 		lblFloor.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		cbFloor = new JComboBox();
-		cbFloor.setModel(new DefaultComboBoxModel(new String[] {"마케팅(10층)", "개발(9층)", "인사(6층)", "총무(7층)", "경영(4층)"}));
+		cbFloor.setModel(new DefaultComboBoxModel(departmentList));
 		panel.add(cbFloor);
 		
 		JLabel lblRegDate = new JLabel("입사일");
@@ -106,4 +109,76 @@ public class MemberPanel extends JPanel {
 		
 	}
 
+	public JTextField getTfNum() {
+		return tfNum;
+	}
+
+	public void setTfNum(JTextField tfNum) {
+		this.tfNum = tfNum;
+	}
+
+	public JTextField getTfName() {
+		return tfName;
+	}
+
+	public void setTfName(JTextField tfName) {
+		this.tfName = tfName;
+	}
+
+	public JTextField getTfRegDate() {
+		return tfRegDate;
+	}
+
+	public void setTfRegDate(JTextField tfRegDate) {
+		this.tfRegDate = tfRegDate;
+	}
+
+	public JRadioButton getRbM() {
+		return rbM;
+	}
+
+	public void setRbM(JRadioButton rbM) {
+		this.rbM = rbM;
+	}
+
+	public JRadioButton getRbF() {
+		return rbF;
+	}
+
+	public void setRbF(JRadioButton rbF) {
+		this.rbF = rbF;
+	}
+
+	public JComboBox getCbTtile() {
+		return cbTtile;
+	}
+
+	public void setCbTtile(JComboBox cbTtile) {
+		this.cbTtile = cbTtile;
+	}
+
+	public JSpinner getSpSal() {
+		return spSal;
+	}
+
+	public void setSpSal(JSpinner spSal) {
+		this.spSal = spSal;
+	}
+
+	public JComboBox getCbFloor() {
+		return cbFloor;
+	}
+
+	public void setCbFloor(JComboBox cbFloor) {
+		this.cbFloor = cbFloor;
+	}
+
+	public String[] getTitleList() {
+		return titleList;
+	}
+
+	public String[] getDepartmentList() {
+		return departmentList;
+	}
+	
 }

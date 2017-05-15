@@ -9,4 +9,5 @@ public abstract class AbstractService<T> {
 	public abstract void delete(int no);
 	public abstract List<T> selectAll();
 	public abstract T selectOne(int no);
+	public abstract T selectLastOne();
 }

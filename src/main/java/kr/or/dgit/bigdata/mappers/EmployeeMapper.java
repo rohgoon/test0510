@@ -10,4 +10,5 @@ public interface EmployeeMapper {
 	public void delete(int dno);
 	public List<Employee> selectAll();
 	public Employee selectOne(int dno);
+	public Employee selectLastOne();
 }

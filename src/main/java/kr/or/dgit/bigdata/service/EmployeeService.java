@@ -90,5 +90,21 @@ public class EmployeeService extends AbstractService<Employee>{
 		
 		return dto;
 	}
+	@Override
+	public Employee selectLastOne() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectLastOne() - start");
+		}
+		Employee dto = new Employee();
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try{
+			EmployeeMapper dMapper = sqlSession.getMapper(EmployeeMapper.class);
+			dto = dMapper.selectLastOne();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return dto;
+	}
 	
 }

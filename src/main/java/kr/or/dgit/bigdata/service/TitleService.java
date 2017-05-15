@@ -90,4 +90,20 @@ public class TitleService extends AbstractService<Title>{
 		
 		return dto;
 	}
+	@Override
+	public Title selectLastOne() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectLastOne() - start");
+		}
+		Title dto = new Title();
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try{
+			TitleMapper tMapper = sqlSession.getMapper(TitleMapper.class);
+			dto = tMapper.selectLastOne();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return dto;
+	}
 }

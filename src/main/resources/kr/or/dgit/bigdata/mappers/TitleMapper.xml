@@ -18,4 +18,7 @@
 	<select id="selectOne" parameterType="int" resultType="Title">
 		select * from title where tcode =#{tcode}
 	</select>
+	<select id="selectLastOne" resultType="Title">
+		select * from title order by tcode desc limit 1
+	</select>
 </mapper>

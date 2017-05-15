@@ -19,4 +19,7 @@
 	<select id="selectOne" parameterType="int" resultType="Employee">
 		select * from employee where eno =#{eno}
 	</select>
+	<select id="selectLastOne" resultType="Employee">
+		select * from employee order by eno desc limit 1
+	</select>
 </mapper>

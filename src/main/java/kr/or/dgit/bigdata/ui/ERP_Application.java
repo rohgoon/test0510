@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.bigdata.dto.Department;
+import kr.or.dgit.bigdata.dto.Employee;
+import kr.or.dgit.bigdata.dto.Title;
+import kr.or.dgit.bigdata.service.DepartmentService;
+import kr.or.dgit.bigdata.service.EmployeeService;
+import kr.or.dgit.bigdata.service.TitleService;
 import kr.or.dgit.bigdata.ui.panel.MemberPanel;
 import kr.or.dgit.bigdata.ui.panel.TeamPanel;
 import kr.or.dgit.bigdata.ui.panel.TitlePanel;
@@ -27,6 +34,7 @@ public class ERP_Application extends JFrame implements ActionListener {
 	private JButton btnTeam;
 	private JButton btnTitle;
 	private JScrollPane sp;
+	JPanel inputPanel;
 	/**
 	 * Create the frame.
 	 */
@@ -64,26 +72,63 @@ public class ERP_Application extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		pnInput.removeAll();
 		pnInput.add(pnBtn, BorderLayout.SOUTH);
-		JPanel memberp = new MemberPanel();
-		JPanel teamp = new TeamPanel();
-		JPanel titlep = new TitlePanel();
-		
 		if (e.getSource() == btnMem) {
 			sf.setTitle("사원관리");
-			pnInput.add(memberp, BorderLayout.CENTER);
+			inputPanel = new MemberPanel();
+			Employee employee = EmployeeService.getInstance().selectLastOne();
+			int etNum = employee.getTitle();
+			Title title = TitleService.getInstance().selectOne(etNum);			
+			String[] titleList = ((MemberPanel)inputPanel).getTitleList();
+			int titleIndex =0;			
+			for (int i = 0; i < titleList.length; i++) {
+				if (titleList[i].equals(title)) {
+					titleIndex = i;
+					break;
+				}
+			}
+			
+			int dpNum = employee.getDno();
+			Department department = DepartmentService.getInstance().selectOne(dpNum);		
+			String[] departmentList = ((MemberPanel)inputPanel).getDepartmentList();
+			int dpIndex= 0;
+			for (int i = 0; i < departmentList.length; i++) {
+				String[] sdArr = departmentList[i].split("(");
+				if (sdArr[0].equals(department.getDname())) {
+					dpIndex =i;
+					break;
+				}
+			}
+			
+			((MemberPanel)inputPanel).getTfNum().setText(employee.getEno()+"");
+			((MemberPanel)inputPanel).getCbTtile().setSelectedIndex(titleIndex);
+			((MemberPanel)inputPanel).getSpSal().setValue(employee.getSalary());
+			((MemberPanel)inputPanel).getCbFloor().setSelectedIndex(dpIndex);
+			
+			
+			if (employee.isGender()) {//여 true
+				((MemberPanel)inputPanel).getRbM().setSelected(false);
+				((MemberPanel)inputPanel).getRbF().setSelected(true);				
+			}else {
+				((MemberPanel)inputPanel).getRbM().setSelected(true);
+				((MemberPanel)inputPanel).getRbF().setSelected(false);
+			}
+			
+			pnInput.add(inputPanel, BorderLayout.CENTER);
 			sf.setBounds(100, 220, 700, 750);
 			table = new EmployeeTable();
 			
 			
 		} else if (e.getSource() == btnTeam) {
 			sf.setTitle("부서관리");
-			pnInput.add(teamp, BorderLayout.CENTER);
+			inputPanel = new TeamPanel();
+			pnInput.add(inputPanel, BorderLayout.CENTER);
 			sf.setBounds(100, 220, 700, 380);
 			table = new DepartmentTable();
 			
 		} else if (e.getSource() == btnTitle) {
 			sf.setTitle("직책관리");
-			pnInput.add(titlep, BorderLayout.CENTER);
+			inputPanel = new TitlePanel();
+			pnInput.add(inputPanel, BorderLayout.CENTER);
 			sf.setBounds(100, 220, 700, 290);
 			table = new TitleTable();		
 		}	
