@@ -33,7 +33,8 @@ public class Department {
 	}
 	
 	public String[] toArray(){
-		return new String[]{dcode+"", dname, floor+""};
+		String[] resArr = {dcode+"", dname, floor+""};
+		return resArr;
 	}
 	@Override
 	public String toString() {

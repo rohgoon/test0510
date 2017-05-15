@@ -26,7 +26,6 @@ public class ERP_Application extends JFrame implements ActionListener {
 	private JButton btnMem;
 	private JButton btnTeam;
 	private JButton btnTitle;
-	private PlainTable table;
 	/**
 	 * Create the frame.
 	 */

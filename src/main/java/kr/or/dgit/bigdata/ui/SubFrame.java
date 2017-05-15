@@ -67,7 +67,6 @@ public class SubFrame extends JFrame {
 		pnTable.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new DepartmentTable();
-		table.getDatas();
 		scrollPane.setViewportView(table);
 	}
 	public JPanel getPnInput() {
