@@ -9,6 +9,12 @@ import kr.or.dgit.bigdata.service.EmployeeService;
 
 public class EmployeeTable extends PlainTable {
 	private List<Employee> eList; 
+	public EmployeeTable() {
+		setToolTipText("원하는 정보에 커서를 두고 우클릭을 하면 기능이 나타납니다.");
+		setEnabled(false);
+		getDatas();
+		setTableWithData();
+	}
 	@Override
 	public void tableSetAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2,4,5,6);

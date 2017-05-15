@@ -31,7 +31,7 @@ public class SubFrame extends JFrame {
 	private JButton btnCancel;
 	private JPanel panel;
 	private JScrollPane scrollPane;
-	private PlainTable table;
+	//private PlainTable table;
 	/**
 	 * Create the frame.
 	 */
@@ -66,8 +66,8 @@ public class SubFrame extends JFrame {
 		scrollPane = new JScrollPane();
 		pnTable.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new DepartmentTable();
-		scrollPane.setViewportView(table);
+		/*table = new DepartmentTable();
+		scrollPane.setViewportView(table);*/
 	}
 	public JPanel getPnInput() {
 		return pnInput;

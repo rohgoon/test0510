@@ -34,25 +34,18 @@ public class DepartmentTable extends PlainTable {
 	public String[][] getDatas() {
 		System.out.println("DepartmentTable start");
 		dList = DepartmentService.getInstance().selectAll();
-		String[][] res = new String[dList.size()][];
-		for(int i=0;i<res.length;i++){
-			res[i] = dList.get(i).toArray();
-			System.out.println(dList.get(i).toArray());
-		}
-		System.out.println("DepartmentTable success");
-		return res;
-		/*if(!dList.isEmpty()){
+		if(!dList.isEmpty()){
 			String[][] res = new String[dList.size()][];
 			for(int i=0;i<res.length;i++){
 				res[i] = dList.get(i).toArray();
-				System.out.println(dList.get(i).toArray());
+				//System.out.println(dList.get(i).toArray());
 			}
 			
 			return res;
 		}else{
-			System.out.println("DepartmentTable empty");
+			//System.out.println("DepartmentTable empty");
 		}
-		return new String[][]{};*/
+		return new String[][]{};
 	}
 
 	@Override

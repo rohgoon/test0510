@@ -10,6 +10,13 @@ import kr.or.dgit.bigdata.service.TitleService;
 
 public class TitleTable extends PlainTable {
 	private List<Title> tList;
+	public TitleTable() {
+		setToolTipText("원하는 정보에 커서를 두고 우클릭을 하면 기능이 나타납니다.");
+		setEnabled(false);
+		getDatas();
+		setTableWithData();
+	}
+	
 	@Override
 	public void tableSetAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0,1);

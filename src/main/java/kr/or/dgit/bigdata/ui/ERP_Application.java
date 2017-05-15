@@ -26,12 +26,14 @@ public class ERP_Application extends JFrame implements ActionListener {
 	private JButton btnMem;
 	private JButton btnTeam;
 	private JButton btnTitle;
+	private JScrollPane sp;
 	/**
 	 * Create the frame.
 	 */
 	private SubFrame sf;
 	private JPanel pnInput;
 	private JPanel pnBtn;
+	private PlainTable table;
 	public ERP_Application() {
 		setTitle("대구아이티ERP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +58,8 @@ public class ERP_Application extends JFrame implements ActionListener {
 		sf = new SubFrame();
 		pnInput  = sf.getPnInput();
 		pnBtn = sf.getPnBtn();
+		
+		sp = sf.getScrollPane();
 	}
 	public void actionPerformed(ActionEvent e) {
 		pnInput.removeAll();
@@ -64,23 +68,26 @@ public class ERP_Application extends JFrame implements ActionListener {
 		JPanel teamp = new TeamPanel();
 		JPanel titlep = new TitlePanel();
 		
-		
 		if (e.getSource() == btnMem) {
 			sf.setTitle("사원관리");
 			pnInput.add(memberp, BorderLayout.CENTER);
-			sf.setBounds(100, 220, 700, 750);	
+			sf.setBounds(100, 220, 700, 750);
+			table = new EmployeeTable();
+			
 			
 		} else if (e.getSource() == btnTeam) {
 			sf.setTitle("부서관리");
 			pnInput.add(teamp, BorderLayout.CENTER);
 			sf.setBounds(100, 220, 700, 380);
+			table = new DepartmentTable();
 			
 		} else if (e.getSource() == btnTitle) {
 			sf.setTitle("직책관리");
 			pnInput.add(titlep, BorderLayout.CENTER);
 			sf.setBounds(100, 220, 700, 290);
-			
+			table = new TitleTable();		
 		}	
+		sp.setViewportView(table);
 		sf.setVisible(true);
 	}
 
