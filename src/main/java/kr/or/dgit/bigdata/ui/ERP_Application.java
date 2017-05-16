@@ -73,9 +73,35 @@ public class ERP_Application extends JFrame implements ActionListener {
 		
 		sf = new SubFrame();
 		pnInput  = sf.getPnInput();
-		pnBtn = sf.getPnBtn();
-		
+		pnBtn = sf.getPnBtn();		
 		sp = sf.getScrollPane();
+		
+		JButton btnAdd = sf.getBtnAdd();
+		btnAdd.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		JButton btnCancel = sf.getBtnAdd();
+		btnCancel.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				switch (tnForPopup) {
+				case 1:							
+					Employee employee = EmployeeService.getInstance().selectLastOne();
+					btnMemClick(employee);
+					break;
+				case 2:
+					
+					break;
+				case 3:
+
+					break;
+				}
+			}
+		});
 	}
 	public void actionPerformed(ActionEvent e) {
 		
@@ -153,7 +179,7 @@ public class ERP_Application extends JFrame implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						int jopi = JOptionPane.showConfirmDialog(null,"정말 삭제하시겠습니까?");
 						if (jopi == 0) {
-							
+							//
 						}
 					}
 				}));
