@@ -40,12 +40,12 @@ public class InitSettingService extends ServiceSetting {
 
 	private void creatSql() {
 		TABLE_SQL.put("title", 
-				"create table title (tcode INT(11) NOT NULL, tname VARCHAR(10) NULL, primary key(tcode))");
+				"create table title (tcode INT(11) NOT NULL AUTO_INCREMENT, tname VARCHAR(10) NULL, primary key(tcode))");
 		TABLE_SQL.put("department", 
-				"create table department (dcode INT(11) NOT NULL, dname CHAR(10) NOT NULL,"
+				"create table department (dcode INT(11) NOT NULL AUTO_INCREMENT, dname CHAR(10) NOT NULL,"
 				+ "floor INT(11) NULL, primary key(dcode))");
 		TABLE_SQL.put("employee",
-				"create table employee (eno INT(11) NOT NULL,"
+				"create table employee (eno INT(11) NOT NULL AUTO_INCREMENT,"
 				+ "ename VARCHAR(20) NOT NULL,"
 				+ "salary INT(11) NULL,"
 				+ "dno INT(11) NULL,"
