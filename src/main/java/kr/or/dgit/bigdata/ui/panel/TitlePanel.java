@@ -2,6 +2,9 @@ package kr.or.dgit.bigdata.ui.panel;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -11,11 +14,13 @@ import javax.swing.JSpinner;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class TitlePanel extends JPanel {
 	private JTextField tfTNum;
 	private JTextField tfTName;
-
+	private Map<String,String> tfMap;
 	/**
 	 * Create the panel.
 	 */
@@ -39,6 +44,12 @@ public class TitlePanel extends JPanel {
 		lblNum.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfTNum = new JTextField();
+		tfTNum.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		tfTNum.setEditable(false);
 		panel.add(tfTNum);
 		tfTNum.setColumns(10);
@@ -48,9 +59,21 @@ public class TitlePanel extends JPanel {
 		lblTeam.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfTName = new JTextField();
+		tfTName.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		panel.add(tfTName);
 		tfTName.setColumns(10);
-		
+		tfMap = new HashMap<String, String>();
 	}
-
+	protected void collectTf() {		
+		tfMap.put("tcode", tfTNum.getText());
+		tfMap.put("tname", tfTName.getText());	
+	}
+	public Map<String, String> getTfMap() {
+		return tfMap;
+	}
 }

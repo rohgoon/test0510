@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -80,7 +83,7 @@ public class ERP_Application extends JFrame implements ActionListener {
 		btnAdd.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				
+				btnAddAction();
 			}
 		});
 		
@@ -88,20 +91,62 @@ public class ERP_Application extends JFrame implements ActionListener {
 		btnCancel.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				switch (tnForPopup) {
-				case 1:							
-					Employee employee = EmployeeService.getInstance().selectLastOne();
-					btnMemClick(employee);
-					break;
-				case 2:
-					
-					break;
-				case 3:
-
-					break;
-				}
+				btnCancelAction();
 			}
 		});
+	}
+	protected void btnAddAction() {
+		switch (tnForPopup) {
+		case 1:	//EmployeeService						
+			Map<String,String> map = ((MemberPanel)inputPanel).getTfMap();
+			Employee dto = new Employee();
+			dto.setEname(map.get("ename"));
+			dto.setSalary(Integer.parseInt(map.get("salary")));
+			
+			if(map.get("gender").equals("0")){
+				dto.setGender(true);
+			}else if(map.get("gender").equals("1")){
+				dto.setGender(false);
+			} 
+			dto.setJoindate(new Date());			
+			List<Title> titleList = TitleService.getInstance().selectAll();
+			for (Title t : titleList) {
+				if (t.getTname().equals(map.get("title"))) {
+					dto.setTitle(t.getTcode());
+				}
+			}
+			List<Department> dList = DepartmentService.getInstance().selectAll();
+			//String[] dnoArr=map.get("dno").split("(");
+			System.out.println(map.get("dno"));
+			for (Department d : dList) {
+				/*if (d.getDname().equals(dnoArr[0])) {
+					dto.setDno(d.getDcode());
+				}	*/			
+			}			
+			EmployeeService.getInstance().insert(dto);
+			
+			break;
+		case 2:
+			
+			break;
+		case 3:
+
+			break;
+		}
+	}
+	protected void btnCancelAction() {
+		switch (tnForPopup) {
+		case 1:							
+			Employee employee = EmployeeService.getInstance().selectLastOne();
+			btnMemClick(employee);
+			break;
+		case 2:
+			
+			break;
+		case 3:
+
+			break;
+		}
 	}
 	public void actionPerformed(ActionEvent e) {
 		

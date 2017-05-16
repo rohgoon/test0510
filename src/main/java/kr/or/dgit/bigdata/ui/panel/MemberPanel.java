@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -17,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class MemberPanel extends JPanel {
 	private JTextField tfNum;
@@ -29,6 +33,7 @@ public class MemberPanel extends JPanel {
 	private JComboBox cbFloor;	
 	private String[] titleList ={"사장", "부장", "과장", "대리", "사원"};
 	private String[] departmentList = {"마케팅(10층)", "개발(9층)", "인사(6층)", "총무(7층)", "경영(4층)"};
+	private Map<String,String> tfMap;
 	/**
 	 * Create the panel.
 	 */
@@ -52,6 +57,12 @@ public class MemberPanel extends JPanel {
 		lblNum.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfNum = new JTextField();
+		tfNum.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		tfNum.setEditable(false);
 		tfNum.setText("E017001");
 		panel.add(tfNum);
@@ -62,6 +73,12 @@ public class MemberPanel extends JPanel {
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfName = new JTextField();
+		tfName.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				collectTf();
+			}
+		});
 		panel.add(tfName);
 		tfName.setColumns(10);
 		
@@ -70,6 +87,12 @@ public class MemberPanel extends JPanel {
 		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		cbTtile = new JComboBox();
+		cbTtile.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		cbTtile.setModel(new DefaultComboBoxModel(titleList));
 		panel.add(cbTtile);
 		
@@ -78,6 +101,12 @@ public class MemberPanel extends JPanel {
 		lblSal.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		spSal = new JSpinner();
+		spSal.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		spSal.setModel(new SpinnerNumberModel(1500000, 1000000, 5000000, 1));
 		panel.add(spSal);
 		
@@ -86,6 +115,12 @@ public class MemberPanel extends JPanel {
 		lblJen.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JPanel pnJender = new JPanel();
+		pnJender.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		panel.add(pnJender);
 		pnJender.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -107,6 +142,12 @@ public class MemberPanel extends JPanel {
 		lblFloor.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		cbFloor = new JComboBox();
+		cbFloor.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		cbFloor.setModel(new DefaultComboBoxModel(departmentList));
 		panel.add(cbFloor);
 		
@@ -115,6 +156,12 @@ public class MemberPanel extends JPanel {
 		lblRegDate.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfRegDate = new JTextField();
+		tfRegDate.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		Date rgd = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String resRgd = sdf.format(rgd);
@@ -122,7 +169,21 @@ public class MemberPanel extends JPanel {
 		panel.add(tfRegDate);
 		tfRegDate.setColumns(10);
 		
-		
+		tfMap = new HashMap<String, String>();
+	}
+
+	protected void collectTf() {		
+		tfMap.put("eno", tfNum.getText());
+		tfMap.put("ename", tfName.getText());
+		tfMap.put("salary", spSal.getValue()+"");
+		tfMap.put("dno", departmentList[cbFloor.getSelectedIndex()]);		
+		if (rbM.isSelected()) {
+			tfMap.put("gender", 0+"");
+		}else if (rbF.isSelected()) {
+			tfMap.put("gender", 1+"");
+		}
+		tfMap.put("joindate", tfRegDate.getText());
+		tfMap.put("title", titleList[cbTtile.getSelectedIndex()]);		
 	}
 
 	public JTextField getTfNum() {
@@ -195,6 +256,10 @@ public class MemberPanel extends JPanel {
 
 	public String[] getDepartmentList() {
 		return departmentList;
+	}
+
+	public Map<String, String> getTfMap() {
+		return tfMap;
 	}
 	
 }

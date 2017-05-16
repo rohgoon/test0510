@@ -11,12 +11,16 @@ import javax.swing.JSpinner;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TeamPanel extends JPanel {
 	private JTextField tfTNum;
 	private JTextField tfTName;
 	private JTextField tfFloor;
-
+	private Map<String,String> tfMap;
 	/**
 	 * Create the panel.
 	 */
@@ -40,6 +44,12 @@ public class TeamPanel extends JPanel {
 		lblNum.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfTNum = new JTextField();
+		tfTNum.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		tfTNum.setEditable(false);
 		panel.add(tfTNum);
 		tfTNum.setColumns(10);
@@ -49,6 +59,12 @@ public class TeamPanel extends JPanel {
 		lblTeam.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfTName = new JTextField();
+		tfTName.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		panel.add(tfTName);
 		tfTName.setColumns(10);
 		
@@ -57,9 +73,22 @@ public class TeamPanel extends JPanel {
 		lblFloor.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfFloor = new JTextField();
+		tfFloor.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				collectTf();
+			}
+		});
 		panel.add(tfFloor);
 		tfFloor.setColumns(10);
-		
+		tfMap = new HashMap<String, String>();
 	}
-
+	protected void collectTf() {		
+		tfMap.put("dcode", tfTNum.getText());
+		tfMap.put("dname", tfTName.getText());		
+		tfMap.put("floor", tfFloor.getText());
+	}
+	public Map<String, String> getTfMap() {
+		return tfMap;
+	}
 }
