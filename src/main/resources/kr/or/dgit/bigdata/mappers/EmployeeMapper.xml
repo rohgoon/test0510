@@ -3,7 +3,7 @@
 <mapper namespace="kr.or.dgit.bigdata.mappers.EmployeeMapper">
 	<insert id="insert" parameterType="Employee">
 		insert into employee(ename, salary, dno, gender, joindate, title) 
-		values(#{ename},#{salary},#{ename},#{dno},#{gender},#{joindate},#{title})
+		values(#{ename},#{salary},#{dno},#{gender},#{joindate},#{title})
 	</insert>
 	<update id="update" parameterType="Employee">
 		update employee set ename=#{ename}, 

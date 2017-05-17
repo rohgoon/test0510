@@ -13,7 +13,7 @@
 		delete from title where tcode =#{tcode}
 	</delete>
 	<select id="selectAll" resultType="Title">
-		select * from title order by tcode desc
+		select * from title
 	</select>
 	<select id="selectOne" parameterType="int" resultType="Title">
 		select * from title where tcode =#{tcode}

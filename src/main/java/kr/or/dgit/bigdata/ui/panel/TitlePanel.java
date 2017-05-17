@@ -76,4 +76,20 @@ public class TitlePanel extends JPanel {
 	public Map<String, String> getTfMap() {
 		return tfMap;
 	}
+	public JTextField getTfTNum() {
+		return tfTNum;
+	}
+	public void setTfTNum(JTextField tfTNum) {
+		this.tfTNum = tfTNum;
+	}
+	public JTextField getTfTName() {
+		return tfTName;
+	}
+	public void setTfTName(JTextField tfTName) {
+		this.tfTName = tfTName;
+	}
+	public void setTfMap(Map<String, String> tfMap) {
+		this.tfMap = tfMap;
+	}
+	
 }

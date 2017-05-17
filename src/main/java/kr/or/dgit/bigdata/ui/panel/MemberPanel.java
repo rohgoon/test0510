@@ -13,6 +13,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -105,6 +106,7 @@ public class MemberPanel extends JPanel {
 		for (int i = 0; i < titleList.length; i++) {
 			titleList[i] = tList.get(i).getTname();
 		}
+		//JOptionPane.showMessageDialog(null, titleList[0]);
 		cbTtile.setModel(new DefaultComboBoxModel(titleList));
 		panel.add(cbTtile);
 		
@@ -163,7 +165,7 @@ public class MemberPanel extends JPanel {
 		dList = DepartmentService.getInstance().selectAll(); 
 		String[] departmentList = new String[dList.size()];
 		for (int i = 0; i < departmentList.length; i++) {
-			departmentList[i] = dList.get(i).getDname()+"("+dList.get(i).getFloor()+"층)";
+			departmentList[i] = dList.get(i).getDname()+" ("+dList.get(i).getFloor()+"층)";
 		}
 		cbFloor.setModel(new DefaultComboBoxModel(departmentList));
 		panel.add(cbFloor);
@@ -193,14 +195,14 @@ public class MemberPanel extends JPanel {
 		tfMap.put("eno", tfNum.getText());
 		tfMap.put("ename", tfName.getText());
 		tfMap.put("salary", spSal.getValue()+"");
-		tfMap.put("dno", cbFloor.getSelectedIndex()+"");		
+		tfMap.put("dno", cbFloor.getSelectedItem().toString());	
 		if (rbM.isSelected()) {
 			tfMap.put("gender", 0+"");
 		}else if (rbF.isSelected()) {
 			tfMap.put("gender", 1+"");
 		}
 		tfMap.put("joindate", tfRegDate.getText());
-		tfMap.put("title", cbTtile.getSelectedIndex()+"");		
+		tfMap.put("title", cbTtile.getSelectedItem().toString());		
 	}
 
 	public JTextField getTfNum() {

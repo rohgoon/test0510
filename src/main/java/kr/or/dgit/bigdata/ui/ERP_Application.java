@@ -97,34 +97,8 @@ public class ERP_Application extends JFrame implements ActionListener {
 	}
 	protected void btnAddAction() {
 		switch (tnForPopup) {
-		case 1:	//EmployeeService						
-			Map<String,String> map = ((MemberPanel)inputPanel).getTfMap();
-			Employee dto = new Employee();
-			dto.setEname(map.get("ename"));
-			dto.setSalary(Integer.parseInt(map.get("salary")));
-			
-			if(map.get("gender").equals("0")){
-				dto.setGender(true);
-			}else if(map.get("gender").equals("1")){
-				dto.setGender(false);
-			} 
-			dto.setJoindate(new Date());			
-			List<Title> titleList = TitleService.getInstance().selectAll();
-			for (Title t : titleList) {
-				if (t.getTname().equals(map.get("title"))) {
-					dto.setTitle(t.getTcode());
-				}
-			}
-			List<Department> dList = DepartmentService.getInstance().selectAll();
-			//String[] dnoArr=map.get("dno").split("(");
-			System.out.println(map.get("dno"));
-			for (Department d : dList) {
-				/*if (d.getDname().equals(dnoArr[0])) {
-					dto.setDno(d.getDcode());
-				}	*/			
-			}			
-			EmployeeService.getInstance().insert(dto);
-			
+		case 1:		
+			empAdd();			
 			break;
 		case 2:
 			
@@ -134,17 +108,90 @@ public class ERP_Application extends JFrame implements ActionListener {
 			break;
 		}
 	}
+	
+	private void empAdd() {
+		Map<String,String> map = ((MemberPanel)inputPanel).getTfMap();
+		Employee dto = new Employee();
+		dto.setEname(map.get("ename"));
+		dto.setSalary(Integer.parseInt(map.get("salary")));
+		
+		if(map.get("gender").equals("0")){
+			dto.setGender(true);
+		}else if(map.get("gender").equals("1")){
+			dto.setGender(false);
+		} 
+		dto.setJoindate(new Date());
+		List<Title> titleList = TitleService.getInstance().selectAll();
+		for (Title t : titleList) {
+			if (t.getTname().equals(map.get("title"))) {
+				dto.setTitle(t.getTcode());
+			}
+		}
+		
+		String dnoStr = map.get("dno");					
+		String[] dnoArr = dnoStr.split(" ");
+		
+		List<Department> dList = DepartmentService.getInstance().selectAll();
+		for (Department d : dList) {
+			if (d.getDname().equals(dnoArr[0])) {
+				dto.setDno(d.getDcode());
+			}
+		}
+		
+		if(dto.getEname().equals("")){
+			JOptionPane.showMessageDialog(null, "사원명을 입력하세요.");
+		}else{
+			EmployeeService.getInstance().insert(dto);				
+		}
+		table =new EmployeeTable();
+		sp.setViewportView(table);
+	}
+	private void dpAdd() {
+		Map<String,String> map = ((TeamPanel)inputPanel).getTfMap();
+		Department dto = new Department();
+		dto.setDname(map.get("dname"));
+		if (map.get("floor").equals("") || dto.getDname().equals("")) {
+			JOptionPane.showMessageDialog(null, "부서 정보를 입력하세요.");
+		}else{
+			dto.setFloor(Integer.parseInt(map.get("floor")));
+			DepartmentService.getInstance().insert(dto);
+		}		
+		table = new DepartmentTable();
+		sp.setViewportView(table);
+	}
+	private void titleAdd() {
+		Map<String,String> map = ((TitlePanel)inputPanel).getTfMap();
+		Title dto = new Title();
+		dto.setTname(map.get("tname"));
+		if (dto.getTname().equals("")) {
+			JOptionPane.showMessageDialog(null, "직책명을 입력하세요.");
+		}else{
+			TitleService.getInstance().insert(dto);
+		}		
+		table = new DepartmentTable();
+		sp.setViewportView(table);
+	}
+	
 	protected void btnCancelAction() {
 		switch (tnForPopup) {
 		case 1:							
 			Employee employee = EmployeeService.getInstance().selectLastOne();
-			btnMemClick(employee);
+			employee.setEno(employee.getEno()+1);
+			employee.setEname("");
+			btnMainClick(employee);
 			break;
 		case 2:
-			
+			Department department = DepartmentService.getInstance().selectLastOne();
+			department.setDcode(department.getDcode()+1);
+			department.setDname("");
+			department.setFloor(0);
+			btnMainClick(department);
 			break;
 		case 3:
-
+			Title titlePlain = TitleService.getInstance().selectLastOne();
+			titlePlain.setTcode(titlePlain.getTcode()+1);
+			titlePlain.setTname("");
+			btnMainClick(titlePlain);	
 			break;
 		}
 	}
@@ -157,22 +204,27 @@ public class ERP_Application extends JFrame implements ActionListener {
 			sf.setTitle("사원관리");
 			inputPanel = new MemberPanel();
 			Employee employee = EmployeeService.getInstance().selectLastOne();
-			btnMemClick(employee);
+			employee.setEno(employee.getEno()+1);
+			employee.setEname("");
+			btnMainClick(employee);
 		} else if (e.getSource() == btnTeam) {
 			tnForPopup =2;
 			sf.setTitle("부서관리");
 			inputPanel = new TeamPanel();
-			pnInput.add(inputPanel, BorderLayout.CENTER);
-			sf.setBounds(100, 220, 700, 380);
-			table = new DepartmentTable();
+			Department department = DepartmentService.getInstance().selectLastOne();
+			department.setDcode(department.getDcode()+1);
+			department.setDname("");
+			department.setFloor(0);
+			btnMainClick(department);
 			
 		} else if (e.getSource() == btnTitle) {
 			tnForPopup =3;
 			sf.setTitle("직책관리");
 			inputPanel = new TitlePanel();
-			pnInput.add(inputPanel, BorderLayout.CENTER);
-			sf.setBounds(100, 220, 700, 290);
-			table = new TitleTable();		
+			Title titlePlain = TitleService.getInstance().selectLastOne();
+			titlePlain.setTcode(titlePlain.getTcode()+1);
+			titlePlain.setTname("");
+			btnMainClick(titlePlain);		
 		}
 		
 		table.addMouseListener(new MouseAdapter() {// popup
@@ -200,7 +252,13 @@ public class ERP_Application extends JFrame implements ActionListener {
 			if (rowindex < 0)
 				return;
 			
-			final int rowValueNo = Integer.parseInt(jt.getValueAt(jt.getSelectedRow(), 0).toString());
+			String jtNum = "";
+			if(tnForPopup == 1){
+				jtNum = jt.getValueAt(jt.getSelectedRow(), 0).toString().substring(4);
+			}else{
+				jtNum = jt.getValueAt(jt.getSelectedRow(), 0).toString().substring(1);
+			}
+			final int rowValueNo = Integer.parseInt(jtNum);
 			if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
 				
 				JPopupMenu popup = new JPopupMenu(); 
@@ -208,23 +266,50 @@ public class ERP_Application extends JFrame implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						switch (tnForPopup) {
 						case 1:							
-							Employee employee = EmployeeService.getInstance().selectOne(rowValueNo);
-							btnMemClick(employee);
+							Employee res1 = EmployeeService.getInstance().selectOne(rowValueNo);
+							btnMainClick(res1);
 							break;
 						case 2:
-							
+							Department res2 = DepartmentService.getInstance().selectOne(rowValueNo);
+							btnMainClick(res2);
 							break;
 						case 3:
-		
+							Title res3 = TitleService.getInstance().selectOne(rowValueNo);
+							btnMainClick(res3);
 							break;
-						}
+						}						
+						sp.setViewportView(table);
 					}
 				}));
 				popup.add(new JMenuItem(new AbstractAction("삭제") {
 					public void actionPerformed(ActionEvent e) {
 						int jopi = JOptionPane.showConfirmDialog(null,"정말 삭제하시겠습니까?");
 						if (jopi == 0) {
-							//
+							switch (tnForPopup) {
+							case 1:							
+								EmployeeService.getInstance().delete(rowValueNo);
+								Employee employee = EmployeeService.getInstance().selectLastOne();
+								employee.setEno(employee.getEno()+1);
+								employee.setEname("");
+								btnMainClick(employee);
+								break;
+							case 2:
+								DepartmentService.getInstance().delete(rowValueNo);
+								Department department = DepartmentService.getInstance().selectLastOne();
+								department.setDcode(department.getDcode()+1);
+								department.setDname("");
+								department.setFloor(0);
+								btnMainClick(department);
+								break;
+							case 3:
+								TitleService.getInstance().delete(rowValueNo);
+								Title titlePlain = TitleService.getInstance().selectLastOne();
+								titlePlain.setTcode(titlePlain.getTcode()+1);
+								titlePlain.setTname("");
+								btnMainClick(titlePlain);
+								break;
+							}
+							sp.setViewportView(table);
 						}
 					}
 				}));
@@ -235,7 +320,7 @@ public class ERP_Application extends JFrame implements ActionListener {
 		
 	}
 	
-	private void btnMemClick(Employee employee) {
+	private void btnMainClick(Employee employee) {
 		
 		if (employee != null) {
 			int eNo = employee.getEno();
@@ -246,19 +331,20 @@ public class ERP_Application extends JFrame implements ActionListener {
 			int dpNum = employee.getDno();
 			Department department = DepartmentService.getInstance().selectOne(dpNum);	
 			
+			((MemberPanel)inputPanel).getTfName().setText(employee.getEname());
 			
 			((MemberPanel)inputPanel).getTfNum().setText("E017"+df.format(eNo));//사번
-			((MemberPanel)inputPanel).getCbTtile().setSelectedIndex(Integer.parseInt(((MemberPanel)inputPanel).getTfMap().get("title")));
+			
 			((MemberPanel)inputPanel).getSpSal().setValue(employee.getSalary());
-			((MemberPanel)inputPanel).getCbFloor().setSelectedIndex(Integer.parseInt(((MemberPanel)inputPanel).getTfMap().get("dno")));
+			
+			((MemberPanel)inputPanel).getCbTtile().setSelectedIndex(employee.getTitle()-1);
+			((MemberPanel)inputPanel).getCbFloor().setSelectedIndex(employee.getDno()-1);
 			
 			
-			if (employee.isGender()) {//여 true
-				//((MemberPanel)inputPanel).getRbM().setSelected(false);
+			if (employee.isGender()) {//여 true				
 				((MemberPanel)inputPanel).getRbF().setSelected(true);				
-			}else {
-				((MemberPanel)inputPanel).getRbM().setSelected(true);
-				//((MemberPanel)inputPanel).getRbF().setSelected(false);
+			}else if (employee.isGender() == false){
+				((MemberPanel)inputPanel).getRbM().setSelected(true);				
 			}
 		}
 		
@@ -267,6 +353,33 @@ public class ERP_Application extends JFrame implements ActionListener {
 		sf.setBounds(100, 220, 700, 750);
 		table = new EmployeeTable();
 		
+	}
+	private void btnMainClick(Department department) {
+		if(department != null){
+			int dcode = department.getDcode();
+			DecimalFormat df = new DecimalFormat("D000");
+			((TeamPanel)inputPanel).getTfTNum().setText(df.format(dcode));
+			((TeamPanel)inputPanel).getTfTName().setText(department.getDname());
+			if (department.getFloor() == 0) {
+				((TeamPanel)inputPanel).getTfFloor().setText("");
+			}else{
+				((TeamPanel)inputPanel).getTfFloor().setText(department.getFloor()+"");
+			}
+		}
+		pnInput.add(inputPanel, BorderLayout.CENTER);
+		sf.setBounds(100, 220, 700, 380);
+		table = new DepartmentTable();
+	}
+	private void btnMainClick(Title title) {
+		if(title != null){
+			int tcode = title.getTcode();
+			DecimalFormat df = new DecimalFormat("T000");
+			((TitlePanel)inputPanel).getTfTNum().setText(df.format(tcode));
+			((TitlePanel)inputPanel).getTfTName().setText(title.getTname());
+		}
+		pnInput.add(inputPanel, BorderLayout.CENTER);
+		sf.setBounds(100, 220, 700, 290);
+		table = new TitleTable();
 	}
 
 }

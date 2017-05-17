@@ -1,5 +1,7 @@
 package kr.or.dgit.bigdata.dto;
 
+import java.text.DecimalFormat;
+
 public class Title {
 	private int tcode;
 	private String tname;
@@ -27,6 +29,7 @@ public class Title {
 	}
 	
 	public String[] toArray(){
-		return new String[]{tcode+"", tname};
+		DecimalFormat df = new DecimalFormat("T000");
+		return new String[]{df.format(tcode), tname};
 	}
 }

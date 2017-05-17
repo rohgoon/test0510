@@ -1,5 +1,7 @@
 package kr.or.dgit.bigdata.dto;
 
+import java.text.DecimalFormat;
+
 public class Department {
 	private int dcode;
 	private String dname;
@@ -33,7 +35,8 @@ public class Department {
 	}
 	
 	public String[] toArray(){
-		String[] resArr = {dcode+"", dname, floor+""};
+		DecimalFormat df = new DecimalFormat("D000");
+		String[] resArr = {df.format(dcode), dname, floor+""};
 		return resArr;
 	}
 	@Override

@@ -1,7 +1,11 @@
 package kr.or.dgit.bigdata.dto;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import kr.or.dgit.bigdata.service.DepartmentService;
+import kr.or.dgit.bigdata.service.TitleService;
 
 public class Employee {
 	private int eno;
@@ -67,12 +71,21 @@ public class Employee {
 		this.title = title;
 	}
 	public String[] toArray(){
-		int g= 0;
+		String g= "남";
 		if (gender) {
-			g=1;
+			g="여";
 		} 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String jd = sdf.format(joindate);
-		return new String[]{eno+"", ename, salary+"",dno+"",g+"",jd,title+""};
+		Department department = DepartmentService.getInstance().selectOne(dno);
+		Title t = TitleService.getInstance().selectOne(title);
+		DecimalFormat df = new DecimalFormat("000");
+		return new String[]{"E017"+df.format(eno), ename,t.getTname(),salary+"",g,department.getDname(),jd};
 	}
+	@Override
+	public String toString() {
+		return String.format("Employee [eno=%s, ename=%s, salary=%s, dno=%s, gender=%s, joindate=%s, title=%s]", eno,
+				ename, salary, dno, gender, joindate, title);
+	}
+	
 }
