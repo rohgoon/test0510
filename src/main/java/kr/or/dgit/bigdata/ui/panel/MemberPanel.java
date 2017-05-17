@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.ButtonGroup;
@@ -19,6 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import kr.or.dgit.bigdata.dto.Department;
+import kr.or.dgit.bigdata.dto.Title;
+import kr.or.dgit.bigdata.service.DepartmentService;
+import kr.or.dgit.bigdata.service.TitleService;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -30,9 +37,9 @@ public class MemberPanel extends JPanel {
 	private JRadioButton rbF;
 	private JComboBox cbTtile;
 	private JSpinner spSal;
-	private JComboBox cbFloor;	
-	private String[] titleList ={"사장", "부장", "과장", "대리", "사원"};
-	private String[] departmentList = {"마케팅(10층)", "개발(9층)", "인사(6층)", "총무(7층)", "경영(4층)"};
+	private JComboBox cbFloor;
+	List<Title> tList;
+	List<Department> dList;
 	private Map<String,String> tfMap;
 	/**
 	 * Create the panel.
@@ -93,6 +100,11 @@ public class MemberPanel extends JPanel {
 				collectTf();
 			}
 		});
+		tList = TitleService.getInstance().selectAll(); 
+		String[] titleList = new String[tList.size()];
+		for (int i = 0; i < titleList.length; i++) {
+			titleList[i] = tList.get(i).getTname();
+		}
 		cbTtile.setModel(new DefaultComboBoxModel(titleList));
 		panel.add(cbTtile);
 		
@@ -148,6 +160,11 @@ public class MemberPanel extends JPanel {
 				collectTf();
 			}
 		});
+		dList = DepartmentService.getInstance().selectAll(); 
+		String[] departmentList = new String[dList.size()];
+		for (int i = 0; i < departmentList.length; i++) {
+			departmentList[i] = dList.get(i).getDname()+"("+dList.get(i).getFloor()+"층)";
+		}
 		cbFloor.setModel(new DefaultComboBoxModel(departmentList));
 		panel.add(cbFloor);
 		
@@ -176,14 +193,14 @@ public class MemberPanel extends JPanel {
 		tfMap.put("eno", tfNum.getText());
 		tfMap.put("ename", tfName.getText());
 		tfMap.put("salary", spSal.getValue()+"");
-		tfMap.put("dno", departmentList[cbFloor.getSelectedIndex()]);		
+		tfMap.put("dno", cbFloor.getSelectedIndex()+"");		
 		if (rbM.isSelected()) {
 			tfMap.put("gender", 0+"");
 		}else if (rbF.isSelected()) {
 			tfMap.put("gender", 1+"");
 		}
 		tfMap.put("joindate", tfRegDate.getText());
-		tfMap.put("title", titleList[cbTtile.getSelectedIndex()]);		
+		tfMap.put("title", cbTtile.getSelectedIndex()+"");		
 	}
 
 	public JTextField getTfNum() {
@@ -250,16 +267,29 @@ public class MemberPanel extends JPanel {
 		this.cbFloor = cbFloor;
 	}
 
-	public String[] getTitleList() {
-		return titleList;
-	}
-
-	public String[] getDepartmentList() {
-		return departmentList;
-	}
 
 	public Map<String, String> getTfMap() {
 		return tfMap;
+	}
+
+	public List<Title> gettList() {
+		return tList;
+	}
+
+	public void settList(List<Title> tList) {
+		this.tList = tList;
+	}
+
+	public List<Department> getdList() {
+		return dList;
+	}
+
+	public void setdList(List<Department> dList) {
+		this.dList = dList;
+	}
+
+	public void setTfMap(Map<String, String> tfMap) {
+		this.tfMap = tfMap;
 	}
 	
 }

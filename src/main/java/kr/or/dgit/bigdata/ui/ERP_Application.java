@@ -241,33 +241,16 @@ public class ERP_Application extends JFrame implements ActionListener {
 			int eNo = employee.getEno();
 			DecimalFormat df = new DecimalFormat("000");//사번 포멧 변환
 			
-			int etNum = employee.getTitle();
-			Title title = TitleService.getInstance().selectOne(etNum);			
-			String[] titleList = ((MemberPanel)inputPanel).getTitleList();
-			int titleIndex =0;			
-			for (int i = 0; i < titleList.length; i++) {
-				if (titleList[i].equals(title)) {
-					titleIndex = i;
-					break;
-				}
-			}
+			int etNum = employee.getTitle();			
 			
 			int dpNum = employee.getDno();
-			Department department = DepartmentService.getInstance().selectOne(dpNum);		
-			String[] departmentList = ((MemberPanel)inputPanel).getDepartmentList();
-			int dpIndex= 0;
-			for (int i = 0; i < departmentList.length; i++) {
-				String[] sdArr = departmentList[i].split("(");
-				if (sdArr[0].equals(department.getDname())) {
-					dpIndex =i;
-					break;
-				}
-			}
+			Department department = DepartmentService.getInstance().selectOne(dpNum);	
+			
 			
 			((MemberPanel)inputPanel).getTfNum().setText("E017"+df.format(eNo));//사번
-			((MemberPanel)inputPanel).getCbTtile().setSelectedIndex(titleIndex);
+			((MemberPanel)inputPanel).getCbTtile().setSelectedIndex(Integer.parseInt(((MemberPanel)inputPanel).getTfMap().get("title")));
 			((MemberPanel)inputPanel).getSpSal().setValue(employee.getSalary());
-			((MemberPanel)inputPanel).getCbFloor().setSelectedIndex(dpIndex);
+			((MemberPanel)inputPanel).getCbFloor().setSelectedIndex(Integer.parseInt(((MemberPanel)inputPanel).getTfMap().get("dno")));
 			
 			
 			if (employee.isGender()) {//여 true
